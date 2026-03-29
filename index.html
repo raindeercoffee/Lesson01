@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>手沖咖啡完整教材</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+TC:wght@300;400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="[https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+TC:wght@300;400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap](https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+TC:wght@300;400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap)" rel="stylesheet">
 <style>
   :root {
     --navy:   #1A3A5C;
@@ -23,9 +22,9 @@
 html { scroll-behavior: smooth; }
 
 body {
-background: var(–dark);
-color: var(–white);
-font-family: ‘Noto Sans TC’, sans-serif;
+background: var(--dark);
+color: var(--white);
+font-family: 'Noto Sans TC', sans-serif;
 font-weight: 300;
 overflow-x: hidden;
 }
@@ -33,7 +32,7 @@ overflow-x: hidden;
 /* ── 啟動頁 ── */
 #launch {
 position: fixed; inset: 0;
-background: var(–dark);
+background: var(--dark);
 display: flex; flex-direction: column;
 align-items: center; justify-content: center;
 z-index: 1000;
@@ -43,32 +42,32 @@ transition: opacity 0.8s ease, visibility 0.8s ease;
 
 .launch-compass {
 width: 120px; height: 120px;
-border: 1.5px solid var(–gold);
+border: 1.5px solid var(--gold);
 border-radius: 50%;
 position: relative;
 margin-bottom: 48px;
 animation: spinCompass 12s linear infinite;
 }
 .launch-compass::before {
-content: ‘’;
+content: '';
 position: absolute; inset: 10px;
 border: 0.5px solid rgba(184,150,46,0.3);
 border-radius: 50%;
 }
 .launch-compass::after {
-content: ‘’;
+content: '';
 position: absolute;
 top: 50%; left: 50%;
 transform: translate(-50%, -50%);
 width: 6px; height: 6px;
-background: var(–gold);
+background: var(--gold);
 border-radius: 50%;
 }
 .compass-n {
 position: absolute; top: 6px; left: 50%;
 transform: translateX(-50%);
-font-size: 10px; color: var(–gold); letter-spacing: 2px;
-font-family: ‘Cormorant Garamond’, serif;
+font-size: 10px; color: var(--gold); letter-spacing: 2px;
+font-family: 'Cormorant Garamond', serif;
 }
 .compass-line-h {
 position: absolute; top: 50%; left: 0; right: 0; height: 0.5px;
@@ -83,17 +82,17 @@ transform: translateX(-50%);
 @keyframes spinCompass { to { transform: rotate(360deg); } }
 
 .launch-title {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: clamp(28px, 5vw, 42px);
 font-weight: 400;
-color: var(–white);
+color: var(--white);
 letter-spacing: 0.05em;
 text-align: center;
 margin-bottom: 12px;
 }
 .launch-sub {
 font-size: 13px;
-color: var(–gold);
+color: var(--gold);
 letter-spacing: 0.2em;
 text-transform: uppercase;
 margin-bottom: 56px;
@@ -101,9 +100,9 @@ margin-bottom: 56px;
 
 .launch-btn {
 background: transparent;
-border: 1.5px solid var(–gold);
-color: var(–gold);
-font-family: ‘Cormorant Garamond’, serif;
+border: 1.5px solid var(--gold);
+color: var(--gold);
+font-family: 'Cormorant Garamond', serif;
 font-size: 16px;
 letter-spacing: 0.15em;
 padding: 16px 56px;
@@ -113,14 +112,14 @@ overflow: hidden;
 transition: color 0.4s ease;
 }
 .launch-btn::before {
-content: ‘’;
+content: '';
 position: absolute; inset: 0;
-background: var(–gold);
+background: var(--gold);
 transform: translateX(-101%);
 transition: transform 0.4s ease;
 }
 .launch-btn:hover::before { transform: translateX(0); }
-.launch-btn:hover { color: var(–dark); }
+.launch-btn:hover { color: var(--dark); }
 .launch-btn span { position: relative; z-index: 1; }
 
 /* ── 主內容 ── */
@@ -139,9 +138,9 @@ height: 56px;
 display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 14px;
-color: var(–gold);
+color: var(--gold);
 letter-spacing: 0.2em;
 text-transform: uppercase;
 }
@@ -156,7 +155,7 @@ text-decoration: none;
 letter-spacing: 0.1em;
 transition: color 0.3s;
 }
-.nav-chapters a:hover { color: var(–gold); }
+.nav-chapters a:hover { color: var(--gold); }
 
 /* ── 共用投影片容器 ── */
 .slide {
@@ -203,42 +202,42 @@ pointer-events: none;
 
 /* ── S01 封面 ── */
 #s01 {
-background: var(–dark);
+background: var(--dark);
 min-height: 100vh;
 }
 .cover-tag {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 11px;
 letter-spacing: 0.35em;
-color: var(–gold);
+color: var(--gold);
 text-transform: uppercase;
 margin-bottom: 32px;
 display: flex; align-items: center; gap: 16px;
 }
 .cover-tag::before {
-content: ‘’;
+content: '';
 display: inline-block;
 width: 48px; height: 0.5px;
-background: var(–gold);
+background: var(--gold);
 }
 .cover-h1 {
-font-family: ‘Noto Serif TC’, serif;
+font-family: 'Noto Serif TC', serif;
 font-size: clamp(38px, 6vw, 72px);
 font-weight: 700;
 line-height: 1.15;
-color: var(–white);
+color: var(--white);
 margin-bottom: 20px;
 }
 .cover-sub {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-style: italic;
 font-size: clamp(16px, 2.5vw, 22px);
-color: var(–gold);
+color: var(--gold);
 margin-bottom: 48px;
 }
 .cover-divider {
 width: 80px; height: 1px;
-background: var(–gold);
+background: var(--gold);
 margin-bottom: 28px;
 }
 .cover-audiences {
@@ -251,8 +250,8 @@ letter-spacing: 0.05em;
 display: flex; align-items: flex-start; gap: 12px;
 }
 .cover-audience-item::before {
-content: ‘·’;
-color: var(–gold);
+content: '·';
+color: var(--gold);
 font-size: 18px;
 line-height: 1;
 flex-shrink: 0;
@@ -267,14 +266,14 @@ border-radius: 50%;
 display: flex; align-items: center; justify-content: center;
 }
 .cover-compass-deco::before {
-content: ‘’;
+content: '';
 position: absolute; inset: 20px;
 border: 0.5px solid rgba(184,150,46,0.12);
 border-radius: 50%;
 }
 .cover-compass-inner {
 width: 8px; height: 8px;
-background: var(–gold);
+background: var(--gold);
 border-radius: 50%;
 }
 .cover-line-h {
@@ -289,20 +288,20 @@ width: 0.5px; background: rgba(184,150,46,0.15);
 position: absolute; bottom: 60px; left: 0; right: 0;
 height: 1px;
 background: repeating-linear-gradient(
-90deg, var(–gold) 0, var(–gold) 8px, transparent 8px, transparent 20px
+90deg, var(--gold) 0, var(--gold) 8px, transparent 8px, transparent 20px
 );
 opacity: 0.3;
 }
 
 /* ── 章節封面 ── */
 .chapter-slide {
-background: var(–navy);
+background: var(--navy);
 }
 .chapter-num {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 120px;
 font-weight: 300;
-color: var(–gold);
+color: var(--gold);
 opacity: 0.18;
 line-height: 1;
 position: absolute;
@@ -313,48 +312,48 @@ user-select: none;
 .chapter-label {
 font-size: 11px;
 letter-spacing: 0.3em;
-color: var(–gold);
+color: var(--gold);
 text-transform: uppercase;
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 margin-bottom: 20px;
 display: flex; align-items: center; gap: 12px;
 }
 .chapter-label::before {
-content: ‘’;
+content: '';
 width: 32px; height: 0.5px;
-background: var(–gold);
+background: var(--gold);
 }
 .chapter-h {
-font-family: ‘Noto Serif TC’, serif;
+font-family: 'Noto Serif TC', serif;
 font-size: clamp(32px, 5.5vw, 62px);
 font-weight: 700;
-color: var(–white);
+color: var(--white);
 line-height: 1.2;
 margin-bottom: 16px;
 }
 .chapter-desc {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-style: italic;
 font-size: clamp(15px, 2vw, 20px);
-color: var(–gold);
+color: var(--gold);
 margin-bottom: 40px;
 }
 .chapter-line {
 width: 60px; height: 1px;
-background: var(–gold);
+background: var(--gold);
 margin-bottom: 16px;
 }
 .chapter-en {
 font-size: 11px;
 letter-spacing: 0.2em;
 color: rgba(250,250,248,0.4);
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 }
 
 /* ── 內容頁共用 ── */
 .content-slide {
-background: var(–cream);
-color: var(–brown);
+background: var(--cream);
+color: var(--brown);
 }
 
 .content-layout {
@@ -367,7 +366,7 @@ overflow: hidden;
 }
 
 .sidebar {
-background: var(–navy);
+background: var(--navy);
 padding: 40px 20px;
 display: flex; flex-direction: column;
 align-items: center; justify-content: center;
@@ -376,9 +375,9 @@ position: relative;
 .sidebar-label {
 font-size: 10px;
 letter-spacing: 0.25em;
-color: var(–gold);
+color: var(--gold);
 text-transform: uppercase;
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 writing-mode: vertical-lr;
 transform: rotate(180deg);
 text-align: center;
@@ -387,7 +386,7 @@ line-height: 1.8;
 .sidebar-dot {
 width: 6px; height: 6px;
 border-radius: 50%;
-background: var(–gold);
+background: var(--gold);
 margin: 20px auto;
 }
 
@@ -396,22 +395,22 @@ padding: 52px 56px;
 }
 .content-topline {
 height: 1.5px;
-background: var(–gold);
+background: var(--gold);
 margin-bottom: 28px;
 }
 .content-h {
-font-family: ‘Noto Serif TC’, serif;
+font-family: 'Noto Serif TC', serif;
 font-size: clamp(20px, 3vw, 30px);
 font-weight: 700;
-color: var(–navy);
+color: var(--navy);
 margin-bottom: 10px;
 line-height: 1.3;
 }
 .content-sub {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-style: italic;
 font-size: 14px;
-color: var(–gold);
+color: var(--gold);
 margin-bottom: 24px;
 letter-spacing: 0.02em;
 }
@@ -423,7 +422,7 @@ margin: 20px 0;
 .content-p {
 font-size: 13.5px;
 line-height: 1.9;
-color: var(–brown);
+color: var(--brown);
 margin-bottom: 16px;
 }
 
@@ -444,64 +443,64 @@ position: relative;
 transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-.card-navy { border-color: var(–navy); background: rgba(26,58,92,0.05); }
-.card-gold  { border-color: var(–gold);  background: rgba(184,150,46,0.06); border-width: 2px; }
-.card-brown { border-color: var(–brown); background: rgba(61,43,31,0.05); }
+.card-navy { border-color: var(--navy); background: rgba(26,58,92,0.05); }
+.card-gold  { border-color: var(--gold);  background: rgba(184,150,46,0.06); border-width: 2px; }
+.card-brown { border-color: var(--brown); background: rgba(61,43,31,0.05); }
 
 .card-title {
-font-family: ‘Noto Serif TC’, serif;
+font-family: 'Noto Serif TC', serif;
 font-size: 15px;
 font-weight: 700;
 margin-bottom: 8px;
 }
-.card-navy .card-title { color: var(–navy); }
-.card-gold  .card-title { color: var(–gold); }
-.card-brown .card-title { color: var(–brown); }
+.card-navy .card-title { color: var(--navy); }
+.card-gold  .card-title { color: var(--gold); }
+.card-brown .card-title { color: var(--brown); }
 
 .card-line {
 height: 0.5px;
 margin-bottom: 10px;
 }
-.card-navy .card-line { background: var(–navy); }
-.card-gold  .card-line { background: var(–gold); }
-.card-brown .card-line { background: var(–brown); }
+.card-navy .card-line { background: var(--navy); }
+.card-gold  .card-line { background: var(--gold); }
+.card-brown .card-line { background: var(--brown); }
 
 .card-text {
 font-size: 12px;
 line-height: 1.7;
-color: var(–brown);
+color: var(--brown);
 }
 .card-num {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 26px;
 font-weight: 700;
 margin: 6px 0 4px;
 }
-.card-navy .card-num { color: var(–navy); }
-.card-gold  .card-num { color: var(–gold); }
-.card-brown .card-num { color: var(–brown); }
+.card-navy .card-num { color: var(--navy); }
+.card-gold  .card-num { color: var(--gold); }
+.card-brown .card-num { color: var(--brown); }
 
 /* ── 提示框 ── */
 .tip-box {
-border: 1px solid var(–gold);
+border: 1px solid var(--gold);
 background: rgba(184,150,46,0.06);
 padding: 16px 20px;
 margin-top: 20px;
 font-size: 13px;
 line-height: 1.7;
-color: var(–navy);
+color: var(--navy);
 }
-.tip-box strong { color: var(–gold); }
+.tip-box strong { color: var(--gold); }
 
 /* 深色提示框 */
 .tip-dark {
-background: var(–gold);
+background: var(--gold);
 padding: 18px 24px;
 margin-top: 20px;
 font-size: 14px;
 font-weight: 500;
-color: var(–dark);
-font-family: ‘Noto Serif TC’, serif;
+color: var(--dark);
+font-family: 'Noto Serif TC', serif;
 text-align: center;
 letter-spacing: 0.03em;
 }
@@ -523,18 +522,18 @@ padding: 14px 56px;
 .param-name {
 font-size: 13px;
 font-weight: 500;
-color: var(–navy);
-font-family: ‘Noto Serif TC’, serif;
+color: var(--navy);
+font-family: 'Noto Serif TC', serif;
 }
 .param-val {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 22px;
 font-weight: 700;
-color: var(–gold);
+color: var(--gold);
 }
 .param-note {
 font-size: 12px;
-color: var(–brown);
+color: var(--brown);
 opacity: 0.8;
 }
 .param-dots {
@@ -542,11 +541,11 @@ display: flex; align-items: center;
 gap: 4px;
 }
 .param-dots::before {
-content: ‘’;
+content: '';
 flex: 1;
 height: 1px;
 background: repeating-linear-gradient(
-90deg, var(–gold) 0, var(–gold) 4px, transparent 4px, transparent 10px
+90deg, var(--gold) 0, var(--gold) 4px, transparent 4px, transparent 10px
 );
 opacity: 0.5;
 }
@@ -558,11 +557,11 @@ padding-left: 36px;
 margin: 16px 0;
 }
 .timeline::before {
-content: ‘’;
+content: '';
 position: absolute;
 left: 7px; top: 12px; bottom: 12px;
 width: 1.5px;
-background: linear-gradient(to bottom, var(–navy), var(–gold), var(–brown));
+background: linear-gradient(to bottom, var(--navy), var(--gold), var(--brown));
 }
 .timeline-item {
 position: relative;
@@ -575,31 +574,31 @@ width: 14px; height: 14px;
 border-radius: 50%;
 border: 2px solid;
 }
-.dot-navy  { border-color: var(–navy);  background: var(–navy); }
-.dot-gold  { border-color: var(–gold);  background: var(–gold); }
-.dot-brown { border-color: var(–brown); background: var(–brown); }
+.dot-navy  { border-color: var(--navy);  background: var(--navy); }
+.dot-gold  { border-color: var(--gold);  background: var(--gold); }
+.dot-brown { border-color: var(--brown); background: var(--brown); }
 
 .timeline-stage {
 font-size: 10px;
 letter-spacing: 0.2em;
 text-transform: uppercase;
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 margin-bottom: 2px;
 }
-.stage-navy  { color: var(–navy); }
-.stage-gold  { color: var(–gold); }
-.stage-brown { color: var(–brown); }
+.stage-navy  { color: var(--navy); }
+.stage-gold  { color: var(--gold); }
+.stage-brown { color: var(--brown); }
 
 .timeline-title {
 font-size: 14px;
 font-weight: 500;
-color: var(–navy);
-font-family: ‘Noto Serif TC’, serif;
+color: var(--navy);
+font-family: 'Noto Serif TC', serif;
 margin-bottom: 2px;
 }
 .timeline-desc {
 font-size: 12.5px;
-color: var(–brown);
+color: var(--brown);
 line-height: 1.6;
 opacity: 0.85;
 }
@@ -618,23 +617,23 @@ transition: background 0.2s;
 .diag-symptom {
 font-size: 13.5px;
 font-weight: 500;
-color: var(–navy);
-font-family: ‘Noto Serif TC’, serif;
+color: var(--navy);
+font-family: 'Noto Serif TC', serif;
 }
 .diag-arrow {
-color: var(–gold);
+color: var(--gold);
 font-size: 14px;
 white-space: nowrap;
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 13px;
 letter-spacing: 0.1em;
 background: rgba(184,150,46,0.1);
 padding: 4px 12px;
-border: 0.5px solid var(–gold);
+border: 0.5px solid var(--gold);
 }
 .diag-fix {
 font-size: 12.5px;
-color: var(–brown);
+color: var(--brown);
 line-height: 1.6;
 }
 
@@ -649,17 +648,17 @@ margin: 24px 0;
 flex: 1;
 padding: 16px 20px;
 text-align: center;
-font-family: ‘Noto Serif TC’, serif;
+font-family: 'Noto Serif TC', serif;
 font-size: 14px;
 font-weight: 700;
 position: relative;
 }
-.upgrade-node.primary { background: var(–gold); color: var(–dark); }
-.upgrade-node.secondary { border: 1.5px solid var(–navy); color: var(–navy); background: transparent; }
+.upgrade-node.primary { background: var(--gold); color: var(--dark); }
+.upgrade-node.secondary { border: 1.5px solid var(--navy); color: var(--navy); background: transparent; }
 .upgrade-node.tertiary { border: 1px solid rgba(26,58,92,0.3); color: rgba(26,58,92,0.6); background: transparent; }
 .upgrade-node .node-num { font-size: 10px; display: block; margin-bottom: 4px; }
 .upgrade-arrow {
-color: var(–gold);
+color: var(--gold);
 font-size: 20px;
 padding: 0 8px;
 flex-shrink: 0;
@@ -672,11 +671,11 @@ gap: 3px;
 margin-top: 16px;
 align-items: center;
 }
-.bar-label { font-size: 11px; color: var(–brown); width: 36px; }
+.bar-label { font-size: 11px; color: var(--brown); width: 36px; }
 .bar-fill {
 flex: 1;
 height: 8px;
-background: linear-gradient(to right, var(–brown), var(–navy), var(–gold));
+background: linear-gradient(to right, var(--brown), var(--navy), var(--gold));
 opacity: 0.6;
 border-radius: 4px;
 }
@@ -693,25 +692,25 @@ padding: 24px;
 border-top: 3px solid;
 background: rgba(26,58,92,0.04);
 }
-.week-1 { border-color: var(–navy); }
-.week-2 { border-color: var(–gold); }
-.week-3 { border-color: var(–brown); }
+.week-1 { border-color: var(--navy); }
+.week-2 { border-color: var(--gold); }
+.week-3 { border-color: var(--brown); }
 .week-num {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 11px;
 letter-spacing: 0.25em;
 text-transform: uppercase;
 margin-bottom: 8px;
 }
-.week-1 .week-num { color: var(–navy); }
-.week-2 .week-num { color: var(–gold); }
-.week-3 .week-num { color: var(–brown); }
+.week-1 .week-num { color: var(--navy); }
+.week-2 .week-num { color: var(--gold); }
+.week-3 .week-num { color: var(--brown); }
 .week-title {
-font-family: ‘Noto Serif TC’, serif;
+font-family: 'Noto Serif TC', serif;
 font-size: 16px;
 font-weight: 700;
 margin-bottom: 12px;
-color: var(–navy);
+color: var(--navy);
 }
 .week-items {
 list-style: none;
@@ -721,15 +720,15 @@ gap: 8px;
 }
 .week-items li {
 font-size: 12px;
-color: var(–brown);
+color: var(--brown);
 line-height: 1.6;
 padding-left: 14px;
 position: relative;
 }
 .week-items li::before {
-content: ‘→’;
+content: '→';
 position: absolute; left: 0;
-color: var(–gold);
+color: var(--gold);
 font-size: 11px;
 }
 .week-goal {
@@ -740,14 +739,14 @@ font-size: 11px;
 letter-spacing: 0.1em;
 font-weight: 600;
 }
-.week-1 .week-goal { color: var(–navy); }
-.week-2 .week-goal { color: var(–gold); }
-.week-3 .week-goal { color: var(–brown); }
+.week-1 .week-goal { color: var(--navy); }
+.week-2 .week-goal { color: var(--gold); }
+.week-3 .week-goal { color: var(--brown); }
 
 /* ── 快速參考卡（結尾） ── */
 #s16 {
-background: var(–navy);
-color: var(–white);
+background: var(--navy);
+color: var(--white);
 }
 .quickref-grid {
 display: grid;
@@ -758,20 +757,20 @@ border: 1px solid rgba(184,150,46,0.2);
 margin-top: 32px;
 }
 .qr-block {
-background: var(–navy);
+background: var(--navy);
 padding: 32px 36px;
 }
 .qr-title {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 13px;
 letter-spacing: 0.2em;
-color: var(–gold);
+color: var(--gold);
 text-transform: uppercase;
 margin-bottom: 20px;
 display: flex; align-items: center; gap: 10px;
 }
 .qr-title::after {
-content: ‘’;
+content: '';
 flex: 1; height: 0.5px;
 background: rgba(184,150,46,0.3);
 }
@@ -784,23 +783,23 @@ padding-left: 16px;
 position: relative;
 }
 .qr-item::before {
-content: ‘·’;
+content: '·';
 position: absolute; left: 0;
-color: var(–gold);
+color: var(--gold);
 }
-.qr-item strong { color: var(–gold); }
+.qr-item strong { color: var(--gold); }
 
 .final-banner {
-background: var(–gold);
+background: var(--gold);
 padding: 24px;
 text-align: center;
 margin-top: 40px;
 }
 .final-banner p {
-font-family: ‘Noto Serif TC’, serif;
+font-family: 'Noto Serif TC', serif;
 font-size: clamp(14px, 2vw, 18px);
 font-weight: 700;
-color: var(–dark);
+color: var(--dark);
 letter-spacing: 0.05em;
 }
 
@@ -809,7 +808,7 @@ letter-spacing: 0.05em;
 position: fixed;
 top: 56px; left: 0;
 height: 2px;
-background: var(–gold);
+background: var(--gold);
 z-index: 99;
 transition: width 0.1s linear;
 width: 0%;
@@ -820,9 +819,9 @@ width: 0%;
 position: fixed;
 bottom: 32px; right: 32px;
 width: 44px; height: 44px;
-border: 1px solid var(–gold);
+border: 1px solid var(--gold);
 background: rgba(26,58,92,0.9);
-color: var(–gold);
+color: var(--gold);
 font-size: 18px;
 cursor: pointer;
 display: flex; align-items: center; justify-content: center;
@@ -832,7 +831,7 @@ transform: translateY(10px);
 z-index: 99;
 }
 .back-top.visible { opacity: 1; transform: translateY(0); }
-.back-top:hover { background: var(–gold); color: var(–dark); }
+.back-top:hover { background: var(--gold); color: var(--dark); }
 
 /* ── RWD ── */
 @media (max-width: 768px) {
@@ -852,8 +851,6 @@ z-index: 99;
 </head>
 <body>
 
-<!-- ── 啟動頁 ── -->
-
 <div id="launch">
   <div class="launch-compass">
     <span class="compass-n">N</span>
@@ -869,8 +866,6 @@ z-index: 99;
     <span>開始航行 &nbsp;→</span>
   </button>
 </div>
-
-<!-- ── 主內容 ── -->
 
 <div id="main">
 
@@ -889,15 +884,12 @@ z-index: 99;
     </ul>
   </nav>
 
-  <!-- S01 封面 -->
-
   <section class="slide" id="s01" style="background:var(--dark); min-height:100vh;">
     <div class="bg-grid"></div>
     <div class="bg-circle" style="width:400px;height:400px;right:-80px;top:50%;transform:translateY(-50%);"></div>
     <div class="bg-circle" style="width:280px;height:280px;right:20px;top:50%;transform:translateY(-50%);"></div>
     <div class="cover-dash-line"></div>
 
-```
 <div class="slide-inner" style="display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;">
   <div>
     <div class="cover-tag reveal">NAVIGATION SERIES &nbsp;｜&nbsp; 咖啡探索計畫</div>
@@ -916,11 +908,8 @@ z-index: 99;
     <div class="cover-compass-inner"></div>
   </div>
 </div>
-```
 
   </section>
-
-  <!-- S02 CH01 章節封面 -->
 
   <section class="slide chapter-slide" id="s02">
     <div class="bg-grid" style="opacity:0.4;"></div>
@@ -933,8 +922,6 @@ z-index: 99;
       <p class="chapter-en reveal reveal-delay-3">Extraction &amp; Core Thinking</p>
     </div>
   </section>
-
-  <!-- S03 萃取率 -->
 
   <section class="slide content-slide" id="s03">
     <div class="slide-inner">
@@ -977,8 +964,6 @@ z-index: 99;
     </div>
   </section>
 
-  <!-- S04 自我診斷 -->
-
   <section class="slide content-slide" id="s04">
     <div class="slide-inner">
       <div class="content-layout">
@@ -1013,8 +998,6 @@ z-index: 99;
     </div>
   </section>
 
-  <!-- S05 CH02 -->
-
   <section class="slide chapter-slide" id="s05">
     <div class="bg-grid" style="opacity:0.4;"></div>
     <div class="chapter-num reveal">02</div>
@@ -1025,7 +1008,6 @@ z-index: 99;
       <div class="chapter-line reveal reveal-delay-3"></div>
       <p class="chapter-en reveal reveal-delay-3">The Three-Layer Pyramid</p>
     </div>
-    <!-- 金字塔裝飾 -->
     <div style="position:absolute;right:8%;bottom:10%;opacity:0.2;">
       <svg width="180" height="140" viewBox="0 0 180 140" fill="none">
         <polygon points="90,10 160,130 20,130" stroke="#B8962E" stroke-width="1.5" fill="none"/>
@@ -1034,8 +1016,6 @@ z-index: 99;
       </svg>
     </div>
   </section>
-
-  <!-- S06 第一層 豆子 -->
 
   <section class="slide content-slide" id="s06">
     <div class="slide-inner">
@@ -1078,8 +1058,6 @@ z-index: 99;
       </div>
     </div>
   </section>
-
-  <!-- S07 第二層 研磨x水溫 -->
 
   <section class="slide content-slide" id="s07">
     <div class="slide-inner">
@@ -1135,8 +1113,6 @@ z-index: 99;
     </div>
   </section>
 
-  <!-- S08 第三層 -->
-
   <section class="slide content-slide" id="s08">
     <div class="slide-inner">
       <div class="content-layout">
@@ -1180,8 +1156,6 @@ z-index: 99;
     </div>
   </section>
 
-  <!-- S09 CH03 -->
-
   <section class="slide chapter-slide" id="s09">
     <div class="bg-grid" style="opacity:0.4;"></div>
     <div class="chapter-num reveal">03</div>
@@ -1191,7 +1165,6 @@ z-index: 99;
       <p class="chapter-desc reveal reveal-delay-2">你手上的工具在做什麼？</p>
       <div class="chapter-line reveal reveal-delay-3"></div>
       <p class="chapter-en reveal reveal-delay-3">Equipment Analysis</p>
-      <!-- 器材圖示 -->
       <div style="position:absolute;right:5%;bottom:15%;display:flex;gap:24px;opacity:0.25;" class="reveal reveal-delay-4">
         <div style="border:1px solid var(--gold);padding:12px 16px;text-align:center;font-size:11px;color:var(--gold);">壺</div>
         <div style="border:1px solid var(--gold);padding:12px 16px;text-align:center;font-size:11px;color:var(--gold);">濾杯</div>
@@ -1200,8 +1173,6 @@ z-index: 99;
       </div>
     </div>
   </section>
-
-  <!-- S10 磨豆機 -->
 
   <section class="slide content-slide" id="s10">
     <div class="slide-inner">
@@ -1253,8 +1224,6 @@ z-index: 99;
     </div>
   </section>
 
-  <!-- S11 濾杯 -->
-
   <section class="slide content-slide" id="s11">
     <div class="slide-inner">
       <div class="content-layout">
@@ -1302,8 +1271,6 @@ z-index: 99;
     </div>
   </section>
 
-  <!-- S12 CH04 -->
-
   <section class="slide chapter-slide" id="s12">
     <div class="bg-grid" style="opacity:0.4;"></div>
     <div class="chapter-num reveal">04</div>
@@ -1313,7 +1280,6 @@ z-index: 99;
       <p class="chapter-desc reveal reveal-delay-2">建立你的基準線</p>
       <div class="chapter-line reveal reveal-delay-3"></div>
       <p class="chapter-en reveal reveal-delay-3">Standard Operating Procedure</p>
-      <!-- 航線停靠點 -->
       <div style="position:absolute;bottom:15%;left:0;right:0;padding:0 8%;display:flex;align-items:center;gap:0;opacity:0.35;" class="reveal reveal-delay-4">
         <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;"></div>
         <div style="flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 6px,transparent 6px,transparent 14px);"></div>
@@ -1327,8 +1293,6 @@ z-index: 99;
       </div>
     </div>
   </section>
-
-  <!-- S13 入門參數 -->
 
   <section class="slide content-slide" id="s13">
     <div class="slide-inner">
@@ -1378,8 +1342,6 @@ z-index: 99;
       </div>
     </div>
   </section>
-
-  <!-- S13b SOP步驟 -->
 
   <section class="slide content-slide" id="s13b">
     <div class="slide-inner">
@@ -1441,8 +1403,6 @@ z-index: 99;
     </div>
   </section>
 
-  <!-- S14 診斷 -->
-
   <section class="slide content-slide" id="s14">
     <div class="slide-inner">
       <div class="content-layout">
@@ -1493,8 +1453,6 @@ z-index: 99;
     </div>
   </section>
 
-  <!-- S14b CH05進階 -->
-
   <section class="slide chapter-slide" id="s14b">
     <div class="bg-grid" style="opacity:0.4;"></div>
     <div class="chapter-num reveal">05</div>
@@ -1506,8 +1464,6 @@ z-index: 99;
       <p class="chapter-en reveal reveal-delay-3">Advanced Concepts</p>
     </div>
   </section>
-
-  <!-- S14c 進階內容 -->
 
   <section class="slide content-slide" id="s14c">
     <div class="slide-inner">
@@ -1537,8 +1493,6 @@ z-index: 99;
       </div>
     </div>
   </section>
-
-  <!-- S15 三週訓練 -->
 
   <section class="slide content-slide" id="s15">
     <div class="slide-inner">
@@ -1589,15 +1543,12 @@ z-index: 99;
     </div>
   </section>
 
-  <!-- S16 快速參考卡 結尾 -->
-
   <section class="slide" id="s16" style="background:var(--navy);min-height:auto;padding-top:100px;padding-bottom:80px;">
     <div class="bg-grid" style="opacity:0.3;"></div>
     <div class="slide-inner">
       <div class="cover-tag reveal" style="color:var(--gold);">QUICK REFERENCE CARD &nbsp;·&nbsp; 隨身速查卡</div>
       <h2 style="font-family:'Noto Serif TC',serif;font-size:clamp(28px,4vw,48px);font-weight:700;color:var(--white);margin-bottom:32px;" class="reveal reveal-delay-1">帶走這張速查卡</h2>
 
-```
   <div class="quickref-grid reveal reveal-delay-2">
     <div class="qr-block">
       <div class="qr-title">🔍 風味診斷</div>
@@ -1627,13 +1578,10 @@ z-index: 99;
     <p>每次只改一個變數，才能真正學到東西。祝每一杯，都是你的作品。☕</p>
   </div>
 </div>
-```
 
   </section>
 
-</div><!-- /main -->
-
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+</div><button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
   function startJourney() {
