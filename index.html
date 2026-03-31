@@ -8,30 +8,42 @@
 <style>
   :root {
     /* 品牌色系設定 */
-    --deep-blue: #0A2D5C;   /* Logo 深海藍 */
-    --brass-gold: #C5A059;  /* 黃銅金 */
-    --wood-brown: #4A3525;  /* 木質深棕 */
-    --chart-white: #F4F1EA; /* 海圖米白 */
-    --matte-black: #1A1A1A; /* 霧感黑 */
+    --brand-navy: #0A2D5C;   /* Logo 深海藍 */
+    --brand-gold: #C5A059;   /* 黃銅金 */
+    --brand-brown: #4A3525;  /* 木質深棕 */
+    --brand-cream: #F4F1EA;  /* 海圖米白 */
+    --brand-black: #1A1A1A;  /* 霧感黑 */
     
     /* 字體設定 */
     --font-serif: 'Noto Serif TC', 'Cormorant Garamond', serif;
     --font-sans: 'Noto Sans TC', sans-serif;
   }
 
-  /* 基礎重置 */
+  /* ── 基礎重置 ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    background-color: var(--matte-black);
+    background-color: var(--brand-black);
     font-family: var(--font-sans);
-    color: var(--matte-black);
+    color: var(--brand-black);
     line-height: 1.6;
     overflow-x: hidden;
   }
 
-  /* ── 簡報框架設定 ── */
-  /* 使用 Scroll Snap 達到 PPT 翻頁感 */
+  /* ── 共用排版類別 (Utility Classes) ── */
+  .text-gold { color: var(--brand-gold) !important; }
+  .text-navy { color: var(--brand-navy) !important; }
+  .text-brown { color: var(--brand-brown) !important; }
+  .text-cream { color: var(--brand-cream) !important; }
+  .font-serif { font-family: var(--font-serif); }
+  .font-bold { font-weight: 700; }
+  .mb-1 { margin-bottom: 0.5rem; }
+  .mb-2 { margin-bottom: 1rem; }
+  .mb-4 { margin-bottom: 2rem; }
+  .mt-2 { margin-top: 1rem; }
+  .mt-4 { margin-top: 2rem; }
+
+  /* ── 簡報框架 ── */
   .presentation {
     height: 100vh;
     overflow-y: scroll;
@@ -48,18 +60,11 @@
     padding: 60px 8%;
     overflow: hidden;
   }
+  .slide-dark { background-color: var(--brand-navy); color: var(--brand-cream); }
+  .slide-light { background-color: var(--brand-cream); color: var(--brand-black); }
+  .content-wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; width: 100%; }
 
-  /* 佈景主題 */
-  .slide-dark {
-    background-color: var(--deep-blue);
-    color: var(--chart-white);
-  }
-  .slide-light {
-    background-color: var(--chart-white);
-    color: var(--matte-black);
-  }
-  
-  /* 海圖背景紋理 (低干擾) */
+  /* 海圖背景紋理 */
   .texture-grid {
     position: absolute; inset: 0;
     background-image: 
@@ -69,555 +74,593 @@
     pointer-events: none;
     z-index: 0;
   }
-  .content-wrapper { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; width: 100%; }
 
-  /* ── 字體與標題排版 ── */
-  h1, h2, h3, .serif-text { font-family: var(--font-serif); }
-  
-  .title-main {
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    color: var(--chart-white);
+  /* ── 側邊星點導覽 (Side Navigation) ── */
+  .side-nav {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
   }
-  .title-sub {
-    font-size: clamp(1.2rem, 2vw, 1.8rem);
-    color: var(--brass-gold);
-    font-weight: 400;
-    letter-spacing: 0.1em;
-  }
-  
-  /* 章節過場頁 */
-  .chapter-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 8rem;
-    color: rgba(197, 160, 89, 0.15);
-    position: absolute;
-    top: 10%; left: 5%;
-    line-height: 1;
-  }
-  .nautical-quote {
-    font-size: 1.8rem;
-    color: var(--brass-gold);
-    border-left: 2px solid var(--brass-gold);
-    padding-left: 2rem;
-    margin-bottom: 3rem;
-    font-style: italic;
-  }
-  .chapter-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-  }
-
-  /* 內容頁標題 */
-  .section-header {
+  .nav-dot-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
+    justify-content: flex-end;
+    cursor: pointer;
+    text-decoration: none;
   }
-  .section-header::before {
-    content: '';
-    width: 40px; height: 2px;
-    background-color: var(--brass-gold);
-  }
-  .section-title {
-    font-size: 2.2rem;
-    color: var(--deep-blue);
-    font-weight: 700;
-  }
-  .slide-dark .section-title { color: var(--brass-gold); }
-
-  /* ── 佈局與元件 (80% 清楚重點) ── */
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  
-  /* 資訊卡片 */
-  .card {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(10, 45, 92, 0.1);
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-  }
-  .slide-dark .card {
-    background: rgba(244, 241, 234, 0.05);
-    border-color: rgba(197, 160, 89, 0.2);
-  }
-  .card-title {
+  .nav-label {
+    position: absolute;
+    right: 24px;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--brand-gold);
+    white-space: nowrap;
     font-family: var(--font-serif);
-    font-size: 1.4rem;
-    color: var(--deep-blue);
-    margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(10, 45, 92, 0.1);
-    padding-bottom: 0.5rem;
+    pointer-events: none;
   }
-  .slide-dark .card-title { color: var(--brass-gold); border-color: rgba(197, 160, 89, 0.2); }
-  
-  /* 表格替代排版 (列表化更易讀) */
-  .info-row {
-    display: flex;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(10, 45, 92, 0.1);
-  }
-  .slide-dark .info-row { border-color: rgba(197, 160, 89, 0.2); }
-  .info-label {
-    width: 30%;
-    font-weight: 700;
-    color: var(--deep-blue);
-  }
-  .slide-dark .info-label { color: var(--brass-gold); }
-  .info-desc { width: 70%; }
-
-  /* 步驟流程 (航線感) */
-  .timeline {
-    position: relative;
-    padding-left: 2rem;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 4px; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--brass-gold);
-    opacity: 0.5;
-  }
-  .step {
-    position: relative;
-    margin-bottom: 2rem;
-  }
-  .step::before {
-    content: '';
-    position: absolute;
-    left: -2.4rem; top: 0.3rem;
-    width: 14px; height: 14px;
+  .nav-dot {
+    width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--chart-white);
-    border: 3px solid var(--deep-blue);
+    background-color: rgba(197, 160, 89, 0.3);
+    transition: all 0.3s ease;
   }
-  .step-title {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--deep-blue);
-    margin-bottom: 0.3rem;
+  .nav-dot-wrapper:hover .nav-label { opacity: 1; transform: translateX(0); }
+  .nav-dot-wrapper:hover .nav-dot { background-color: var(--brand-gold); transform: scale(1.5); }
+  .nav-dot-wrapper.active .nav-dot {
+    background-color: var(--brand-gold);
+    box-shadow: 0 0 10px rgba(197, 160, 89, 0.5);
+    transform: scale(1.5);
   }
 
-  /* 提示區塊 */
+  /* 返回頂部按鈕 */
+  .back-to-top {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    width: 40px; height: 40px;
+    background: var(--brand-navy);
+    border: 1px solid var(--brand-gold);
+    color: var(--brand-gold);
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 99;
+    font-size: 1.2rem;
+  }
+  .back-to-top.visible { opacity: 1; visibility: visible; }
+  .back-to-top:hover { background: var(--brand-gold); color: var(--brand-navy); }
+
+  /* ── 標題與排版元件 ── */
+  .title-main { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; line-height: 1.2; font-family: var(--font-serif); }
+  .title-sub { font-size: clamp(1.1rem, 2vw, 1.5rem); letter-spacing: 0.1em; }
+  .chapter-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem; color: rgba(197, 160, 89, 0.15);
+    position: absolute; top: 10%; left: 5%; line-height: 1; pointer-events: none;
+  }
+  .nautical-quote {
+    font-size: 1.8rem; color: var(--brand-gold);
+    border-left: 2px solid var(--brand-gold); padding-left: 1.5rem;
+    font-style: italic; font-family: var(--font-serif);
+  }
+  .chapter-title { font-size: 3rem; font-weight: 700; font-family: var(--font-serif); margin-top: 2rem;}
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+  .section-header::before { content: ''; width: 40px; height: 2px; background-color: var(--brand-gold); }
+  .section-title { font-size: 2rem; color: var(--brand-navy); font-weight: 700; font-family: var(--font-serif); }
+  .slide-dark .section-title { color: var(--brand-gold); }
+
+  /* ── 網格與卡片系統 ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(10, 45, 92, 0.1);
+    padding: 1.5rem;
+  }
+  .slide-dark .card { background: rgba(244, 241, 234, 0.05); border-color: rgba(197, 160, 89, 0.2); }
+  .card-title {
+    font-family: var(--font-serif); font-size: 1.3rem; color: var(--brand-navy);
+    border-bottom: 1px solid rgba(10, 45, 92, 0.1); padding-bottom: 0.5rem; margin-bottom: 1rem;
+  }
+  .slide-dark .card-title { color: var(--brand-gold); border-color: rgba(197, 160, 89, 0.2); }
+  
+  /* 列表化資訊列 */
+  .info-row { display: flex; padding: 0.8rem 0; border-bottom: 1px solid rgba(10, 45, 92, 0.1); align-items: baseline;}
+  .slide-dark .info-row { border-color: rgba(197, 160, 89, 0.2); }
+  .info-label { width: 30%; font-weight: 700; color: var(--brand-navy); flex-shrink: 0; padding-right: 1rem;}
+  .slide-dark .info-label { color: var(--brand-gold); }
+  .info-desc { width: 70%; font-size: 0.95rem; }
+
+  /* 時間軸 (SOP與計畫) */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 4px; top: 0; bottom: 0; width: 2px; background: var(--brand-gold); opacity: 0.5; }
+  .step { position: relative; margin-bottom: 1.5rem; }
+  .step::before {
+    content: ''; position: absolute; left: -2.35rem; top: 0.3rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--brand-cream); border: 3px solid var(--brand-navy);
+  }
+  .step-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; color: var(--brand-navy); }
+
+  /* 提示框 */
   .tip-box {
     background: rgba(197, 160, 89, 0.1);
-    border-left: 3px solid var(--brass-gold);
-    padding: 1.2rem 1.5rem;
-    margin-top: 2rem;
-    font-size: 0.95rem;
+    border-left: 3px solid var(--brand-gold);
+    padding: 1rem 1.5rem; font-size: 0.95rem; margin-top: 1.5rem;
   }
 
-  /* ── 動畫 (低干擾、漸進式) ── */
-  .animate-fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-  .animate-fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  /* 順序延遲 */
+  /* ── 動畫設定 ── */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
   .delay-1 { transition-delay: 0.2s; }
   .delay-2 { transition-delay: 0.4s; }
   .delay-3 { transition-delay: 0.6s; }
 
-  /* 頂部進度條 */
-  .progress-bar {
-    position: fixed;
-    top: 0; left: 0;
-    height: 4px;
-    background-color: var(--brass-gold);
-    z-index: 100;
-    width: 0%;
-    transition: width 0.3s ease;
-  }
-
-  /* Logo 浮水印 */
-  .logo-watermark {
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
-    font-family: var(--font-serif);
-    color: var(--brass-gold);
-    letter-spacing: 0.2em;
-    font-size: 1rem;
-    opacity: 0.6;
-    z-index: 10;
-  }
+  /* Logo 水印 */
+  .watermark { position: absolute; bottom: 30px; left: 8%; font-family: var(--font-serif); color: var(--brand-gold); letter-spacing: 0.2em; font-size: 0.9rem; opacity: 0.6; z-index: 10; }
 
   /* RWD */
   @media (max-width: 768px) {
-    .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 1.5rem; }
-    .slide { padding: 40px 6%; }
-    .chapter-number { font-size: 5rem; }
-    .nautical-quote { font-size: 1.4rem; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .slide { padding: 60px 6%; }
+    .side-nav { display: none; }
     .info-row { flex-direction: column; }
     .info-label { width: 100%; margin-bottom: 0.3rem; }
     .info-desc { width: 100%; }
+    .chapter-number { font-size: 5rem; }
   }
 </style>
 </head>
 <body>
 
-<div class="progress-bar" id="progressBar"></div>
+<nav class="side-nav" id="sideNav">
+  <a href="#cover" class="nav-dot-wrapper" data-target="cover"><span class="nav-label">啟航</span><div class="nav-dot"></div></a>
+  <a href="#ch1" class="nav-dot-wrapper" data-target="ch1"><span class="nav-label">CH.01 咖啡豆</span><div class="nav-dot"></div></a>
+  <a href="#ch2" class="nav-dot-wrapper" data-target="ch2"><span class="nav-label">CH.02 核心思維</span><div class="nav-dot"></div></a>
+  <a href="#ch3" class="nav-dot-wrapper" data-target="ch3"><span class="nav-label">CH.03 金字塔</span><div class="nav-dot"></div></a>
+  <a href="#ch4" class="nav-dot-wrapper" data-target="ch4"><span class="nav-label">CH.04 器材</span><div class="nav-dot"></div></a>
+  <a href="#ch5" class="nav-dot-wrapper" data-target="ch5"><span class="nav-label">CH.05 SOP</span><div class="nav-dot"></div></a>
+  <a href="#ch6" class="nav-dot-wrapper" data-target="ch6"><span class="nav-label">CH.06 進階概念</span><div class="nav-dot"></div></a>
+  <a href="#ch7" class="nav-dot-wrapper" data-target="ch7"><span class="nav-label">CH.07 實作計畫</span><div class="nav-dot"></div></a>
+  <a href="#ch8" class="nav-dot-wrapper" data-target="ch8"><span class="nav-label">CH.08 味覺訓練</span><div class="nav-dot"></div></a>
+  <a href="#quickref" class="nav-dot-wrapper" data-target="quickref"><span class="nav-label">隨身速查卡</span><div class="nav-dot"></div></a>
+</nav>
+
+<button class="back-to-top" id="backToTop" onclick="document.getElementById('presentation').scrollTo({top:0, behavior:'smooth'})">↑</button>
 
 <div class="presentation" id="presentation">
 
-  <section class="slide slide-dark">
+  <section class="slide slide-dark" id="cover">
     <div class="texture-grid"></div>
-    <div class="content-wrapper">
-      <div class="animate-fade-up">
-        <h2 style="color:var(--brass-gold); font-family:var(--font-serif); letter-spacing:0.2em; margin-bottom:2rem; font-size:1.2rem;">雨 鹿 咖 啡 ｜ 航海計畫</h2>
-        <h1 class="title-main">手沖咖啡<br>完整教材</h1>
-        <p class="title-sub">從「沖不好喝」到「每杯都是作品」</p>
-      </div>
+    <div class="content-wrapper fade-up">
+      <div class="text-gold font-serif mb-2" style="letter-spacing:0.2em; font-size:1.1rem;">雨 鹿 咖 啡 ｜ 航海計畫</div>
+      <h1 class="title-main mb-2">手沖咖啡<br>完整教材</h1>
+      <p class="title-sub text-gold">從「沖不好喝」到「每杯都是作品」</p>
       
-      <div class="tip-box animate-fade-up delay-2" style="max-width: 500px; margin-top: 4rem; background: rgba(0,0,0,0.2); border-left-color: var(--chart-white);">
-        <p style="color:var(--chart-white); font-weight:700; margin-bottom:0.5rem;">適合對象：</p>
-        <ul style="color:rgba(244,241,234,0.8); margin-left:1.5rem; font-size:0.9rem;">
+      <div class="tip-box mt-4 fade-up delay-2" style="max-width: 500px; background: rgba(0,0,0,0.3); border-color: var(--brand-cream);">
+        <p class="font-bold text-cream mb-1">適合對象：</p>
+        <ul class="text-cream" style="margin-left:1.5rem; opacity:0.8; font-size:0.9rem;">
           <li>已有手沖器材、希望系統化提升的自學者</li>
           <li>想了解「為什麼這樣沖更好」的咖啡愛好者</li>
+          <li>正在建立自己沖法系統的初中階學習者</li>
         </ul>
       </div>
     </div>
-    <div class="logo-watermark">RAIN DEER</div>
+    <div class="watermark">RAIN DEER</div>
   </section>
 
-  <section class="slide slide-dark">
+  <section class="slide slide-dark" id="ch1">
     <div class="texture-grid"></div>
     <div class="chapter-number">01</div>
-    <div class="content-wrapper animate-fade-up">
-      <div class="nautical-quote">
-        「多數人不是沒有豆子，而是沒有羅盤。」
-      </div>
+    <div class="content-wrapper fade-up">
+      <div class="nautical-quote">「多數人不是沒有豆子，而是沒有羅盤。」</div>
       <h2 class="chapter-title">認識咖啡豆：產地、風土與處理法</h2>
-      <p style="margin-top:1.5rem; font-size:1.2rem; color:rgba(244,241,234,0.8); max-width:600px;">
-        沖一杯好咖啡，最前面的功課不是器材，不是手法——而是選豆。豆子的產地和處理方式，決定了這杯咖啡「能長成什麼樣子」的上限。
+      <p class="mt-2 text-cream" style="font-size:1.1rem; max-width:700px; opacity:0.8;">
+        沖一杯好咖啡，最前面的功課不是器材或手法，而是選豆。產地和處理方式，決定了這杯咖啡的潛力上限。
       </p>
     </div>
-    <div class="logo-watermark">RAIN DEER</div>
+    <div class="watermark">RAIN DEER</div>
   </section>
 
   <section class="slide slide-light">
     <div class="content-wrapper">
-      <div class="section-header animate-fade-up">
-        <h2 class="section-title">三大基礎處理法：改變風味的源頭</h2>
-      </div>
-      
-      <div class="grid-3 animate-fade-up delay-1">
-        <div class="card">
-          <h3 class="card-title">水洗法 Washed</h3>
-          <p style="font-size:0.9rem; margin-bottom:1rem; color:var(--wood-brown);">去除果皮與果肉，在水中發酵清洗。</p>
-          <ul style="margin-left:1.2rem; font-size:0.95rem;">
-            <li><strong>風味：</strong>乾淨、明亮、酸質清晰、花香</li>
-            <li><strong>口感：</strong>輕盈、清透</li>
-            <li><strong>代表：</strong>衣索比亞耶加雪菲、肯亞</li>
+      <div class="section-header fade-up"><h2 class="section-title">各大洲風土與典型風味</h2></div>
+      <div class="grid-3 fade-up delay-1">
+        <div class="card" style="border-top: 3px solid var(--brand-gold);">
+          <h3 class="card-title">🌍 非洲區</h3>
+          <p class="font-bold text-navy mb-1">明亮果酸、花香、柑橘調</p>
+          <p class="text-brown mb-2" style="font-size:0.9rem;">高海拔與強烈日照，造就鮮活的酸質與複雜花果香。</p>
+          <ul class="text-brown" style="margin-left:1.2rem; font-size:0.85rem;">
+            <li><strong>衣索比亞：</strong>茉莉花、藍莓 (花果香入門)</li>
+            <li><strong>肯亞：</strong>黑醋栗、番茄汁般甜酸</li>
           </ul>
         </div>
-        
-        <div class="card">
-          <h3 class="card-title">日曬法 Natural</h3>
-          <p style="font-size:0.9rem; margin-bottom:1rem; color:var(--wood-brown);">整顆果實直接日曬，在果肉中熟化。</p>
-          <ul style="margin-left:1.2rem; font-size:0.95rem;">
-            <li><strong>風味：</strong>甜度高、發酵果香、莓果酒感</li>
-            <li><strong>口感：</strong>醇厚、黏稠感</li>
-            <li><strong>代表：</strong>巴西日曬、衣索比亞哈拉</li>
+        <div class="card" style="border-top: 3px solid var(--brand-navy);">
+          <h3 class="card-title">🌎 中南美洲區</h3>
+          <p class="font-bold text-navy mb-1">堅果、巧克力、均衡醇厚</p>
+          <p class="text-brown mb-2" style="font-size:0.9rem;">從清甜均衡到濃厚醇重都有，容錯率高，入門最友善。</p>
+          <ul class="text-brown" style="margin-left:1.2rem; font-size:0.85rem;">
+            <li><strong>哥倫比亞：</strong>榛果、蘋果酸 (平衡基準)</li>
+            <li><strong>巴西：</strong>低酸度、適合深焙</li>
           </ul>
         </div>
-
-        <div class="card">
-          <h3 class="card-title">蜜處理 Honey</h3>
-          <p style="font-size:0.9rem; margin-bottom:1rem; color:var(--wood-brown);">去除果皮但保留果肉黏膜乾燥。</p>
-          <ul style="margin-left:1.2rem; font-size:0.95rem;">
-            <li><strong>風味：</strong>溫和甜感、焦糖、桃子</li>
-            <li><strong>口感：</strong>介於水洗與日曬之間，柔滑</li>
-            <li><strong>代表：</strong>哥斯大黎加</li>
+        <div class="card" style="border-top: 3px solid var(--brand-brown);">
+          <h3 class="card-title">🌏 亞洲區</h3>
+          <p class="font-bold text-navy mb-1">草本植物、木質調、厚重感</p>
+          <p class="text-brown mb-2" style="font-size:0.9rem;">濕熱氣候帶來大地、香料、菸草等厚重個性風味。</p>
+          <ul class="text-brown" style="margin-left:1.2rem; font-size:0.85rem;">
+            <li><strong>印尼蘇門答臘：</strong>曼特寧，低酸醇厚感極強</li>
           </ul>
         </div>
-      </div>
-
-      <div class="tip-box animate-fade-up delay-2">
-        <strong>💡 選豆定錨：</strong> 不知道從哪裡開始？先選「哥倫比亞」或「衣索比亞中焙」。前者教你什麼是平衡，後者教你什麼是層次與香氣。
       </div>
     </div>
   </section>
 
-  <section class="slide slide-dark">
+  <section class="slide slide-dark" id="ch2">
     <div class="texture-grid"></div>
     <div class="chapter-number">02</div>
-    <div class="content-wrapper animate-fade-up">
-      <div class="nautical-quote">
-        「風味不穩，不一定是天氣變了，而是航線偏了。」
-      </div>
+    <div class="content-wrapper fade-up">
+      <div class="nautical-quote">「風味不穩，不一定是天氣變了，而是航線偏了。」</div>
       <h2 class="chapter-title">核心思維：你在控制什麼？</h2>
     </div>
-    <div class="logo-watermark">RAIN DEER</div>
+    <div class="watermark">RAIN DEER</div>
   </section>
 
   <section class="slide slide-light">
     <div class="content-wrapper">
-      <div class="section-header animate-fade-up">
-        <h2 class="section-title">萃取率 (Extraction Yield) 的甜蜜點</h2>
-      </div>
-      <p class="animate-fade-up delay-1" style="margin-bottom:2rem; font-size:1.1rem;">
-        手沖的所有動作，只在控制一件事：你把豆子裡多少可溶性物質溶進了水裡。理想萃取率落在 <strong>18%–22%</strong>。
+      <div class="section-header fade-up"><h2 class="section-title">萃取率 (Extraction Yield)</h2></div>
+      <p class="fade-up delay-1 mb-4 text-brown" style="font-size:1.1rem;">
+        手沖的所有動作，只在控制一件事：你把豆子裡多少可溶性物質溶進了水裡。<br>根據 SCA 研究，理想甜蜜點落在 <strong class="text-navy">18%–22%</strong>。
       </p>
-
-      <div class="animate-fade-up delay-2">
+      <div class="fade-up delay-2 card">
         <div class="info-row">
           <div class="info-label">萃取不足 (< 18%)</div>
-          <div class="info-desc">
-            <strong>風味：</strong>酸澀、單薄、草味、尖銳<br>
-            <strong>原因：</strong>溫度太低 / 研磨太粗 / 時間太短
-          </div>
+          <div class="info-desc"><strong>風味：</strong>酸澀、單薄、草味、尖銳<br><strong>原因：</strong>溫度低、研磨太粗、時間短</div>
         </div>
-        <div class="info-row" style="background: rgba(197, 160, 89, 0.1); padding-left:1rem;">
-          <div class="info-label" style="color:var(--brass-gold);">最佳萃取 (18% – 22%)</div>
+        <div class="info-row" style="background:rgba(197,160,89,0.1); padding-left:1rem;">
+          <div class="info-label text-gold">最佳萃取 (18-22%)</div>
           <div class="info-desc"><strong>風味：</strong>甜感、平衡、層次豐富、乾淨</div>
         </div>
-        <div class="info-row">
+        <div class="info-row" style="border-bottom:none;">
           <div class="info-label">萃取過度 (> 22%)</div>
-          <div class="info-desc">
-            <strong>風味：</strong>苦澀、雜味、悶重、乾燥感<br>
-            <strong>原因：</strong>溫度太高 / 研磨太細 / 時間太長
-          </div>
+          <div class="info-desc"><strong>風味：</strong>苦澀、雜味、悶重、乾燥感<br><strong>原因：</strong>溫度高、研磨太細、時間長</div>
         </div>
       </div>
-
-      <div class="tip-box animate-fade-up delay-3">
-        <strong>💡 快速自我診斷：</strong> 每次沖完問自己：「這杯太酸太薄？還是太苦太悶？」好不好喝不是診斷，哪裡不對才是。
+      <div class="tip-box fade-up delay-3">
+        <strong>💡 自我診斷：</strong>每次沖完問自己「太酸太薄？還是太苦太悶？」好不好喝不是診斷，哪裡不對才是。
       </div>
     </div>
   </section>
 
-  <section class="slide slide-dark">
+  <section class="slide slide-dark" id="ch3">
     <div class="texture-grid"></div>
     <div class="chapter-number">03</div>
-    <div class="content-wrapper animate-fade-up">
-      <div class="nautical-quote">
-        「好的萃取，不是運氣，是你開始看懂海流。」
-      </div>
-      <h2 class="chapter-title">三層金字塔：找到問題在哪層</h2>
+    <div class="content-wrapper fade-up">
+      <div class="nautical-quote">「好的萃取，不是運氣，是你開始看懂海流。」</div>
+      <h2 class="chapter-title">三層金字塔：排錯優先順序</h2>
     </div>
-    <div class="logo-watermark">RAIN DEER</div>
+    <div class="watermark">RAIN DEER</div>
   </section>
 
   <section class="slide slide-light">
     <div class="content-wrapper">
-      <div class="section-header animate-fade-up">
-        <h2 class="section-title">排錯的優先順序</h2>
-      </div>
-      
-      <div class="grid-3 animate-fade-up delay-1">
-        <div class="card" style="border-top: 4px solid var(--deep-blue);">
+      <div class="section-header fade-up"><h2 class="section-title">找出問題所在的層級</h2></div>
+      <div class="grid-3 fade-up delay-1">
+        <div class="card" style="border-top: 4px solid var(--brand-navy);">
           <h3 class="card-title">第一層：豆子狀態</h3>
-          <p style="color:var(--brass-gold); font-weight:bold; margin-bottom:1rem;">★★★★★ 最優先 (地基)</p>
-          <p style="font-size:0.95rem;">
-            <strong>新鮮度：</strong>烘焙後 7–21 天最佳。超過 30 天失去香氣。<br><br>
-            <strong>烘焙度：</strong>淺焙重酸香(需高溫)，深焙重苦甜(需低溫)。
-          </p>
+          <p class="text-gold font-bold mb-1">★★★★★ (決定天花板)</p>
+          <ul class="text-brown" style="padding-left:1.2rem; font-size:0.9rem;">
+            <li class="mb-1"><strong>新鮮度：</strong>烘焙後 7–21 天最佳。超過 30 天失去香氣。</li>
+            <li><strong>烘焙度：</strong>淺焙需高溫解酸香；深焙需低溫避焦苦。</li>
+          </ul>
         </div>
-        
-        <div class="card" style="border-top: 4px solid var(--brass-gold);">
+        <div class="card" style="border-top: 4px solid var(--brand-gold);">
           <h3 class="card-title">第二層：研磨 × 水溫</h3>
-          <p style="color:var(--deep-blue); font-weight:bold; margin-bottom:1rem;">★★★★☆ 關鍵 (油門)</p>
-          <p style="font-size:0.95rem;">
-            <strong>研磨：</strong>細粉過多會造成局部過萃。均勻度比粗細更重要。<br><br>
-            <strong>水溫：</strong>淺焙 90–96°C，中焙 88–92°C，深焙 83–88°C。
-          </p>
+          <p class="text-navy font-bold mb-1">★★★★☆ (油門與解析度)</p>
+          <ul class="text-brown" style="padding-left:1.2rem; font-size:0.9rem;">
+            <li class="mb-1"><strong>研磨：</strong>細粉過多會局部過萃，均勻度最重要。</li>
+            <li><strong>水溫：</strong>淺焙 90–96°C，中焙 88–92°C，深焙 83–88°C。</li>
+          </ul>
         </div>
-
-        <div class="card" style="border-top: 4px solid var(--wood-brown);">
+        <div class="card" style="border-top: 4px solid var(--brand-brown);">
           <h3 class="card-title">第三層：粉水比 × 手法</h3>
-          <p style="color:var(--wood-brown); font-weight:bold; margin-bottom:1rem;">★★★☆☆ 微調 (錦上添花)</p>
-          <p style="font-size:0.95rem;">
-            <strong>比例：</strong>標準起點 1:15 (15g粉對225g水)。<br><br>
-            <strong>時間：</strong>時間是「結果」而非目標，應藉由研磨粗細讓時間自然落在 2:30-3:30 間。
+          <p class="text-brown font-bold mb-1">★★★☆☆ (微調與個人風格)</p>
+          <ul class="text-brown" style="padding-left:1.2rem; font-size:0.9rem;">
+            <li class="mb-1"><strong>比例：</strong>標準起點 1:15。</li>
+            <li><strong>時間：</strong>是「結果」非目標。中焙參考時間 2:30–3:30 內完成即可。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide-dark" id="ch4">
+    <div class="texture-grid"></div>
+    <div class="chapter-number">04</div>
+    <div class="content-wrapper fade-up">
+      <h2 class="chapter-title">器材解析：工具在做什麼？</h2>
+      <p class="mt-2 text-cream" style="font-size:1.1rem;">器材不是越貴越好，而是要知道它在幫你控制什麼變數。</p>
+    </div>
+    <div class="watermark">RAIN DEER</div>
+  </section>
+
+  <section class="slide slide-light">
+    <div class="content-wrapper">
+      <div class="section-header fade-up"><h2 class="section-title">核心設備升級建議</h2></div>
+      <div class="grid-2 fade-up delay-1">
+        <div class="card">
+          <h3 class="card-title">磨豆機 (影響最大)</h3>
+          <p class="text-brown font-bold mb-1">投資報酬率最高的第一順位</p>
+          <p class="text-brown" style="font-size:0.9rem;">便宜磨豆機細粉多、粒徑不均，導致局部過萃(苦)與不足(酸)同時發生。<br><strong>診斷：</strong>若磨完手指一抹全是白細粉，該升級了。</p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">溫控手沖壺</h3>
+          <p class="text-brown font-bold mb-1">排除最大的干擾變數</p>
+          <p class="text-brown" style="font-size:0.9rem;">強烈建議入手，讓你專注在「手法」與「研磨」，不用再猜測水溫變化。</p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">電子秤</h3>
+          <p class="text-brown font-bold mb-1">最便宜的精準化工具</p>
+          <p class="text-brown" style="font-size:0.9rem;">建議精度 0.1g 且響應快。每次都用秤量粉和注水，放棄「湯匙估計」。</p>
+        </div>
+        <div class="card">
+          <h3 class="card-title">濾杯 (Dripper)</h3>
+          <p class="text-brown font-bold mb-1">容錯率決定穩定度</p>
+          <p class="text-brown" style="font-size:0.9rem;">
+            <strong>V60：</strong>流速快、手法影響大。<br>
+            <strong>Kalita Wave / 聰明杯：</strong>流速穩、容錯率高。常沖不穩建議先換這兩款。
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="slide slide-dark">
+  <section class="slide slide-dark" id="ch5">
     <div class="texture-grid"></div>
     <div class="chapter-number">05</div>
-    <div class="content-wrapper animate-fade-up">
-      <div class="nautical-quote">
-        「定錨，才能測量海流的速度。」
-      </div>
-      <h2 class="chapter-title">標準沖法 SOP：建立基準線</h2>
-      <p style="margin-top:1.5rem; font-size:1.2rem; color:rgba(244,241,234,0.8);">
-        在調整任何東西之前，先建立一個基準。每次只改一個變數，才能知道航線偏向哪裡。
-      </p>
+    <div class="content-wrapper fade-up">
+      <div class="nautical-quote">「定錨，才能測量海流的速度。」</div>
+      <h2 class="chapter-title">標準 SOP：建立基準線</h2>
+      <p class="mt-2 text-cream" style="font-size:1.1rem;">在調整任何東西之前，先建立基準。每次只改一個變數。</p>
     </div>
-    <div class="logo-watermark">RAIN DEER</div>
+    <div class="watermark">RAIN DEER</div>
   </section>
 
   <section class="slide slide-light">
     <div class="content-wrapper">
       <div class="grid-2">
-        <div class="animate-fade-up">
-          <div class="section-header">
-            <h2 class="section-title">標準操作流程</h2>
-          </div>
+        <div class="fade-up">
+          <div class="section-header mb-4"><h2 class="section-title">標準操作流程</h2></div>
           <div class="timeline">
-            <div class="step">
-              <div class="step-title">1. 準備與沖洗 (Rinse)</div>
-              <p style="font-size:0.95rem;">熱水溫杯並沖洗濾紙紙味；準備 15g 中研磨咖啡粉。</p>
-            </div>
-            <div class="step">
-              <div class="step-title">2. 悶蒸 (Bloom) 0-30s</div>
-              <p style="font-size:0.95rem;">注入 30g 水 (粉的2倍)，靜置 30 秒讓 CO₂ 排出。粉床膨越高代表越新鮮。</p>
-            </div>
-            <div class="step">
-              <div class="step-title">3. 第一段注水 30s-60s</div>
-              <p style="font-size:0.95rem;">由內往外螺旋注水，平穩加水至 120g。</p>
-            </div>
-            <div class="step">
-              <div class="step-title">4. 第二段注水 60s-120s</div>
-              <p style="font-size:0.95rem;">繼續注水至 225g (達成 1:15 粉水比)，等待滴濾完成 (約 2:30-3:30)。</p>
-            </div>
+            <div class="step"><div class="step-title">1. 準備與沖洗</div><p class="text-brown" style="font-size:0.9rem;">熱水沖洗濾紙紙味；準備 15g 中研磨粉。</p></div>
+            <div class="step"><div class="step-title">2. 悶蒸 (0-30s)</div><p class="text-brown" style="font-size:0.9rem;">注入 30g 水，靜置 30 秒讓 CO₂ 排出。</p></div>
+            <div class="step"><div class="step-title">3. 第一段注水 (30-60s)</div><p class="text-brown" style="font-size:0.9rem;">螺旋注水至 120g。</p></div>
+            <div class="step"><div class="step-title">4. 第二段注水 (60-120s)</div><p class="text-brown" style="font-size:0.9rem;">注水至 225g，等待滴濾完成。</p></div>
           </div>
         </div>
         
-        <div class="animate-fade-up delay-1">
-          <div class="card" style="background:var(--deep-blue); color:var(--chart-white); height:100%;">
-            <h3 class="card-title" style="color:var(--brass-gold); border-bottom-color:rgba(255,255,255,0.2);">單一變數調整邏輯</h3>
-            <ul style="margin-top:1.5rem; list-style:none; display:flex; flex-direction:column; gap:1.5rem;">
-              <li>
-                <strong style="color:var(--brass-gold);">太酸、太薄 (萃取不足)</strong><br>
-                ↑ 升高水溫 / ↓ 磨細一格 / ↑ 延長悶蒸
-              </li>
-              <li>
-                <strong style="color:var(--brass-gold);">太苦、太悶 (萃取過度)</strong><br>
-                ↓ 降低水溫 / ↑ 磨粗一格 / ↓ 縮短時間
-              </li>
-              <li>
-                <strong style="color:var(--brass-gold);">味道單調沒有層次</strong><br>
-                確認新鮮度 / 換不同產區的豆子
-              </li>
-              <li>
-                <strong style="color:var(--brass-gold);">每次結果都不一樣</strong><br>
-                先固定水溫(溫控壺)與粉量(電子秤)
-              </li>
-            </ul>
-          </div>
+        <div class="fade-up delay-1 card slide-dark">
+          <h3 class="card-title mb-4">單一變數調整邏輯</h3>
+          <ul class="text-cream" style="list-style:none; display:flex; flex-direction:column; gap:1.2rem; font-size:0.95rem;">
+            <li><strong class="text-gold">太酸、太薄 (萃取不足)</strong><br>↑ 水溫 / ↓ 磨細一格 / ↑ 延長悶蒸</li>
+            <li><strong class="text-gold">太苦、太悶 (萃取過度)</strong><br>↓ 水溫 / ↑ 磨粗一格 / ↓ 縮短時間</li>
+            <li><strong class="text-gold">酸苦雜混 (萃取不均)</strong><br>檢查細粉 / 考慮升級磨豆機</li>
+            <li><strong class="text-gold">每次結果都不一樣</strong><br>先固定水溫(溫控壺)與粉量(秤)</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="slide slide-dark">
+  <section class="slide slide-dark" id="ch6">
     <div class="texture-grid"></div>
-    <div class="chapter-number">08</div>
-    <div class="content-wrapper animate-fade-up">
-      <div class="nautical-quote">
-        「讓你的舌頭，成為最精準的羅盤。」
-      </div>
-      <h2 class="chapter-title">味覺訓練：擴展感知邊界</h2>
+    <div class="chapter-number">06</div>
+    <div class="content-wrapper fade-up">
+      <h2 class="chapter-title">進階概念：讀懂每一杯</h2>
     </div>
-    <div class="logo-watermark">RAIN DEER</div>
+    <div class="watermark">RAIN DEER</div>
   </section>
 
   <section class="slide slide-light">
     <div class="content-wrapper">
-      <div class="section-header animate-fade-up">
-        <h2 class="section-title">味覺體驗的四個層次</h2>
-      </div>
-      
-      <p class="animate-fade-up delay-1" style="margin-bottom:2rem; font-size:1.1rem; color:var(--wood-brown);">
-        大腦對風味的感受，<strong>80% 來自嗅覺</strong>，不是舌頭。訓練鼻子比訓練舌頭更重要。
-      </p>
-
-      <div class="animate-fade-up delay-2">
-        <div class="info-row">
-          <div class="info-label">1. 基本味覺 (舌頭)</div>
-          <div class="info-desc">酸、甜、苦、鹹、鮮。建議：對照品嚐不同濃度的茶或咖啡。</div>
+      <div class="section-header fade-up"><h2 class="section-title">關鍵微調概念</h2></div>
+      <div class="grid-3 fade-up delay-1">
+        <div class="card">
+          <h3 class="card-title">TDS vs 萃取率</h3>
+          <p class="text-brown" style="font-size:0.9rem;">TDS 是「濃度」，萃取率是「從豆子取出的比例」。喝起來苦卻很淡，可能是萃取過度而非水量太多。</p>
         </div>
-        <div class="info-row">
-          <div class="info-label">2. 嗅覺 - 前鼻</div>
-          <div class="info-desc">花香、果香、堅果。建議：喝入口前，深吸三秒，強迫大腦主動命名氣味。</div>
+        <div class="card">
+          <h3 class="card-title">水質的影響</h3>
+          <p class="text-brown" style="font-size:0.9rem;">水佔了咖啡的 98%。<br>純水萃取弱風味扁平；硬水易苦澀。<br>建議：TDS 100-150ppm 的市售水或過濾水。</p>
         </div>
-        <div class="info-row">
-          <div class="info-label">3. 嗅覺 - 後鼻</div>
-          <div class="info-desc">餘韻、複雜度。建議：吞嚥後閉口用鼻子呼氣，感受喉嚨殘留的 5-15 秒香氣。</div>
+        <div class="card">
+          <h3 class="card-title">悶蒸的意義</h3>
+          <p class="text-brown" style="font-size:0.9rem;">粉床膨脹越高代表豆子越新鮮。排空 CO₂ 是為了讓後段水流能均勻接觸咖啡粉。</p>
         </div>
-        <div class="info-row">
-          <div class="info-label">4. 觸覺 / 口感</div>
-          <div class="info-desc">醇厚度、澀感、油脂感。</div>
-        </div>
-      </div>
-
-      <div class="tip-box animate-fade-up delay-3">
-        <strong>⚠️ 味覺天敵：</strong> 抽菸(尼古丁麻痺味蕾)、辛辣食物、高溫熱飲(降低甜酸敏感度)、疲勞鼻塞。
       </div>
     </div>
   </section>
 
-  <section class="slide slide-dark" style="text-align: center;">
+  <section class="slide slide-dark" id="ch7">
     <div class="texture-grid"></div>
-    <div class="content-wrapper animate-fade-up">
-      <h2 class="title-main" style="margin-bottom: 2rem;">Quick Reference</h2>
+    <div class="chapter-number">07</div>
+    <div class="content-wrapper fade-up">
+      <h2 class="chapter-title">實作練習：三週訓練計畫</h2>
+      <p class="mt-2 text-cream" style="font-size:1.1rem;">知識轉化為直覺，需要刻意練習。</p>
+    </div>
+    <div class="watermark">RAIN DEER</div>
+  </section>
+
+  <section class="slide slide-light">
+    <div class="content-wrapper">
+      <div class="section-header fade-up"><h2 class="section-title">逐步建立穩定度</h2></div>
+      <div class="grid-3 fade-up delay-1">
+        <div class="card">
+          <h3 class="card-title">Week 1: 建立基準</h3>
+          <ul class="text-brown" style="padding-left:1.2rem; font-size:0.9rem;">
+            <li>使用新鮮豆 (14天內)</li>
+            <li>每天用完全相同參數沖煮</li>
+            <li>記錄時間與風味</li>
+            <li class="font-bold text-navy mt-2">目標：每天結果接近</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Week 2: 單變數實驗</h3>
+          <ul class="text-brown" style="padding-left:1.2rem; font-size:0.9rem;">
+            <li>只改水溫 (每次 ±2°C)，記錄差異</li>
+            <li>隔天只改研磨粗細，記錄差異</li>
+            <li class="font-bold text-navy mt-2">目標：感受單一變數影響</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Week 3: 診斷練習</h3>
+          <ul class="text-brown" style="padding-left:1.2rem; font-size:0.9rem;">
+            <li>請朋友改變一項參數盲測</li>
+            <li>只靠風味判斷不足或過度</li>
+            <li class="font-bold text-navy mt-2">目標：味覺成為診斷工具</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide-dark" id="ch8">
+    <div class="texture-grid"></div>
+    <div class="chapter-number">08</div>
+    <div class="content-wrapper fade-up">
+      <div class="nautical-quote">「讓你的舌頭，成為最精準的羅盤。」</div>
+      <h2 class="chapter-title">味覺訓練：擴展感知邊界</h2>
+      <p class="mt-2 text-cream" style="font-size:1.1rem;">大腦對風味的感受 80% 來自嗅覺。訓練鼻子比舌頭更重要。</p>
+    </div>
+    <div class="watermark">RAIN DEER</div>
+  </section>
+
+  <section class="slide slide-light">
+    <div class="content-wrapper">
+      <div class="section-header fade-up"><h2 class="section-title">四層次與天敵</h2></div>
+      <div class="grid-2 fade-up delay-1">
+        <div class="card">
+          <h3 class="card-title">品嚐的四個層次</h3>
+          <div class="info-row"><div class="info-label">1. 舌頭</div><div class="info-desc">酸、甜、苦、鹹、鮮。</div></div>
+          <div class="info-row"><div class="info-label">2. 前鼻</div><div class="info-desc">花香、果香。入口前深吸三秒主動命名。</div></div>
+          <div class="info-row"><div class="info-label">3. 後鼻</div><div class="info-desc">餘韻。吞嚥後閉口用鼻子呼氣感受回香。</div></div>
+          <div class="info-row" style="border:none;"><div class="info-label">4. 口感</div><div class="info-desc">醇厚度、澀感、油脂感。</div></div>
+        </div>
+        <div class="card slide-dark">
+          <h3 class="card-title">⚠️ 味覺天敵</h3>
+          <ul class="text-cream" style="list-style:none; display:flex; flex-direction:column; gap:1rem; font-size:0.9rem;">
+            <li><strong class="text-gold">剛抽菸：</strong>尼古丁麻痺味蕾，鼻腔降敏 30 分鐘。</li>
+            <li><strong class="text-gold">辛辣食物：</strong>辣椒素蓋過細微風味訊號。</li>
+            <li><strong class="text-gold">喝熱飲：</strong>高溫暫時降低對甜酸的敏感度。</li>
+            <li><strong class="text-gold">睡眠不足/鼻塞：</strong>嗅覺受阻失去 80% 風味訊息。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide-dark" id="quickref" style="text-align: center;">
+    <div class="texture-grid"></div>
+    <div class="content-wrapper fade-up">
+      <h2 class="title-main mb-4">Quick Reference Card</h2>
       
-      <div class="card" style="background:rgba(255,255,255,0.1); border-color:var(--brass-gold); color:var(--chart-white); display:inline-block; text-align:left; max-width:600px; width:100%;">
-        <h3 style="color:var(--brass-gold); border-bottom:1px solid rgba(197,160,89,0.3); padding-bottom:1rem; margin-bottom:1rem; font-family:var(--font-serif);">📋 入門標準參數</h3>
-        <p style="font-size:1.1rem; line-height:2;">
-          <strong>咖啡粉：</strong> 15g<br>
-          <strong>水　量：</strong> 225g (1:15)<br>
-          <strong>水　溫：</strong> 90°C (依烘焙度調整)<br>
-          <strong>研　磨：</strong> 中研磨<br>
-          <strong>悶　蒸：</strong> 30g / 30秒<br>
-          <strong>總時間：</strong> 2:30 – 3:30
-        </p>
+      <div class="grid-2" style="text-align: left;">
+        <div class="card" style="background:rgba(255,255,255,0.05); border-color:var(--brand-gold);">
+          <h3 class="card-title font-serif">📋 入門標準參數</h3>
+          <ul class="text-cream" style="list-style:none; line-height:2; font-size:1.1rem;">
+            <li><strong>粉量：</strong> 15g</li>
+            <li><strong>水量：</strong> 225g (1:15)</li>
+            <li><strong>水溫：</strong> 90°C (淺焙高/深焙低)</li>
+            <li><strong>研磨：</strong> 中研磨</li>
+            <li><strong>悶蒸：</strong> 30g / 30秒</li>
+            <li><strong>時間：</strong> 2:30 – 3:30</li>
+          </ul>
+        </div>
+        
+        <div class="card" style="background:rgba(255,255,255,0.05); border-color:var(--brand-gold);">
+          <h3 class="card-title font-serif">🔍 快速診斷</h3>
+          <ul class="text-cream" style="list-style:none; line-height:2; font-size:1.1rem;">
+            <li><strong>太酸太薄：</strong> ↑ 升溫 / ↓ 磨細</li>
+            <li><strong>太苦太悶：</strong> ↓ 降溫 / ↑ 磨粗</li>
+            <li><strong>酸苦雜味：</strong> 檢查磨豆機細粉</li>
+            <li><strong>不穩定：</strong> 先固定秤量與水溫</li>
+          </ul>
+        </div>
       </div>
 
-      <p style="margin-top: 4rem; color:var(--brass-gold); font-size:1.2rem; font-style:italic;">
-        「每次只改一個變數，才能真正學到東西。」
+      <p class="mt-4 text-gold font-serif" style="font-size:1.3rem; font-style:italic;">
+        「每次只改一個變數，祝每一杯都是你的作品。」
       </p>
     </div>
-    <div class="logo-watermark">RAIN DEER</div>
+    <div class="watermark">RAIN DEER</div>
   </section>
 
 </div>
 
 <script>
-  // 處理頂部進度條
+  // Intersection Observer 處理淡入動畫與側邊導覽列連動
   const presentation = document.getElementById('presentation');
-  const progressBar = document.getElementById('progressBar');
+  const sections = document.querySelectorAll('.slide');
+  const navDots = document.querySelectorAll('.nav-dot-wrapper');
+  const backBtn = document.getElementById('backToTop');
 
-  presentation.addEventListener('scroll', () => {
-    const totalHeight = presentation.scrollHeight - presentation.clientHeight;
-    const progress = (presentation.scrollTop / totalHeight) * 100;
-    progressBar.style.width = progress + '%';
-  });
-
-  // Intersection Observer 處理淡入與分層顯示動畫
   const observerOptions = {
     root: presentation,
     rootMargin: '0px',
-    threshold: 0.15 // 元件露出 15% 即觸發
+    threshold: 0.5 // 當區塊進入畫面 50% 時觸發
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+      // 處理淡入動畫
+      const fadeElements = entry.target.querySelectorAll('.fade-up');
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      } else {
-        // 若希望往回滑時重複播放動畫，可保留下一行；若希望只播放一次則註解掉
-        entry.target.classList.remove('visible'); 
+        fadeElements.forEach(el => el.classList.add('visible'));
+        
+        // 處理側邊導覽列亮點
+        const currentId = entry.target.getAttribute('id');
+        navDots.forEach(dot => {
+          dot.classList.remove('active');
+          if (dot.getAttribute('data-target') === currentId) {
+            dot.classList.add('active');
+          }
+        });
       }
     });
   }, observerOptions);
 
-  document.querySelectorAll('.animate-fade-up').forEach(el => {
-    observer.observe(el);
+  sections.forEach(sec => observer.observe(sec));
+
+  // 側邊點擊平滑滾動
+  navDots.forEach(dot => {
+    dot.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('data-target');
+      const targetSection = document.getElementById(targetId);
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // 返回頂部按鈕的顯示/隱藏
+  presentation.addEventListener('scroll', () => {
+    if (presentation.scrollTop > window.innerHeight * 0.8) {
+      backBtn.classList.add('visible');
+    } else {
+      backBtn.classList.remove('visible');
+    }
   });
 </script>
 
