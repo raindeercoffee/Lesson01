@@ -95,10 +95,23 @@
     display: flex; align-items: center; gap: 24px;
   }
   .nav-logo {
-    flex: 0 0 auto;
-    font-family: 'Noto Serif TC', serif; font-size: 15px; color: var(--gold);
-    letter-spacing: 0.2em; font-weight: 700; white-space: nowrap;
-  }
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 15px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.nav-logo img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
   .nav-wrap { overflow-x: auto; flex: 1; scrollbar-width: none; }
   .nav-wrap::-webkit-scrollbar { display: none; }
   .nav-chapters { display: flex; gap: 24px; list-style: none; width: max-content; padding-right: 12px; }
@@ -386,10 +399,11 @@
 <div id="main">
   <div class="progress-bar" id="progressBar"></div>
 
-  <nav>
-    <div class="nav-logo">Rain Deer Roastery</div>
-    <div class="nav-wrap">
-      <ul class="nav-chapters">
+ <div class="nav-logo">
+  <img src="deer-icon.png" alt="deer">
+  <span>Rain Deer Roastery</span>
+  </div>      
+        <ul class="nav-chapters">
         <li><a href="#s01">封面</a></li>
         <li><a href="#c01">CH.01 產地</a></li>
         <li><a href="#c02">CH.02 核心思維</a></li>
